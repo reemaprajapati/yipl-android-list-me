@@ -7,8 +7,8 @@ import com.google.gson.annotations.SerializedName;
  * Created by Otimus on 10/31/2016.
  */
 public class PostItem {
-    @SerializedName("userID")
-    String userId;
+    @SerializedName("userId")
+    Integer userId;
 
     @SerializedName("id")
     Integer id;
@@ -19,18 +19,21 @@ public class PostItem {
     @SerializedName("body")
     String body;
 
-    public PostItem(String userId, Integer id, String title, String body) {
+    public PostItem() {
+    }
+
+    public PostItem(Integer userId, Integer id, String title, String body) {
         this.userId = userId;
         this.id = id;
         this.title = title;
         this.body = body;
     }
 
-    public String getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 

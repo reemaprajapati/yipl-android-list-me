@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.example.otimus.yipllisting.databaseHelper.SQLiteHandler;
 import com.example.otimus.yipllisting.model.PostItem;
 import com.example.otimus.yipllisting.rest.ApiClient;
 import com.example.otimus.yipllisting.rest.ApiInterface;
@@ -17,28 +18,27 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
-
+    SQLiteHandler db;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setContentView(R.layout.activity_main);
-        final RecyclerView recyclerView=(RecyclerView)findViewById(R.id.recyclerview);
+        db = new SQLiteHandler(this);
+
+        final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
 
-        ApiInterface apiInterface= ApiClient.getClient().create(ApiInterface.class);
-        Call<List<PostItem>> call=apiInterface.getPosts();
+        ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
+        Call<List<PostItem>> call = apiInterface.getPosts();
         call.enqueue(new Callback<List<PostItem>>() {
 
             @Override
             public void onResponse(Call<List<PostItem>> call, Response<List<PostItem>> response) {
-                recyclerView.setAdapter(new PostAdapter(response.body(), new PostAdapter.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(PostItem item) {
-
-                    }
-                }));
+                for (PostItem postitem : response.body()
+                        ) {
+                    db.addPost(postitem);
+                }
             }
 
             @Override
@@ -46,5 +46,13 @@ public class MainActivity extends AppCompatActivity {
                 t.printStackTrace();
             }
         });
+        recyclerView.setAdapter(new PostAdapter(db.allPosts(), new PostAdapter.OnItemClickListener() {
+
+
+            @Override
+            public void onItemClick(PostItem item) {
+
+            }
+        }));
     }
  }
