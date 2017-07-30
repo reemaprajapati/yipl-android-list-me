@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">YIPLlisting</string>
+    <string name="mainActivity">Posts</string>
+    <string name="detailActivity">Details</string>
 </resources>

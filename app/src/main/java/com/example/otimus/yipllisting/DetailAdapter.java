@@ -32,10 +32,7 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.CommentHol
         holder.name.setText(detailItemList.get(position).getPname());
         holder.email.setText(detailItemList.get(position).getEmail());
         holder.body.setText(detailItemList.get(position).getBody());
-
-
     }
-
 
 
     @Override
@@ -50,7 +47,6 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.CommentHol
             name=(TextView)itemView.findViewById(R.id.cname);
             email=(TextView)itemView.findViewById(R.id.cemail);
             body=(TextView)itemView.findViewById(R.id.cbody);
-
         }
     }
 

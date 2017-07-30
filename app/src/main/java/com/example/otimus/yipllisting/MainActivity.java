@@ -29,15 +29,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         db = new SQLiteHandler(this);
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
-
         savePosts();
         saveDetails();
-
         recyclerView.setAdapter(new PostAdapter(db.allPosts(),new PostAdapter.OnItemClickListener(){
             @Override
             //sending details from MainActivity to DetailActivity as "list" on each item click
@@ -55,8 +54,6 @@ public class MainActivity extends AppCompatActivity {
 
     //retrieving data from www.jsonplaceholder.typecode.com/posts and storing to the database
     public void savePosts(){
-
-
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
         Call<List<PostItem>> call = apiInterface.getPosts();
         call.enqueue(new Callback<List<PostItem>>() {

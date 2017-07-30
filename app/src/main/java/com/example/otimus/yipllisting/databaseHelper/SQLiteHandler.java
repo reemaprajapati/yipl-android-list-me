@@ -124,7 +124,11 @@ public class SQLiteHandler extends SQLiteOpenHelper {
         values.put(KEY_EMAIL, detailItem.getEmail());
         values.put(KEY_COMMENT_BODY, detailItem.getBody());
         // insert
-        database.insert(TABLE_NAME_DETAILS,null, values);
+        try {
+            database.insert(TABLE_NAME_DETAILS, null, values);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         database.close();
     }
 
