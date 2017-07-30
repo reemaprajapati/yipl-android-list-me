@@ -1,4 +1,4 @@
-package com.example.otimus.yipllisting;
+package com.example.otimus.yipllisting.adapters;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.otimus.yipllisting.R;
 import com.example.otimus.yipllisting.model.PostItem;
 
 import java.util.List;
@@ -38,9 +39,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostHolder> {
     @Override
     public void onBindViewHolder(PostHolder holder, int position) {
         holder.bind(postItems.get(position),listener);
-
         holder.id.setText(toString().valueOf(postItems.get(position).getId()));
-
         holder.title.setText(postItems.get(position).getTitle());
         holder.body.setText(postItems.get(position).getBody());
     }

@@ -1,4 +1,4 @@
-package com.example.otimus.yipllisting;
+package com.example.otimus.yipllisting.adapters;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.otimus.yipllisting.R;
 import com.example.otimus.yipllisting.model.DetailItem;
 
 import java.util.List;
@@ -19,6 +20,7 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.CommentHol
 
     public DetailAdapter(List<DetailItem> detailItemList) {
         this.detailItemList = detailItemList;
+
     }
 
     @Override
@@ -41,12 +43,14 @@ public class DetailAdapter extends RecyclerView.Adapter<DetailAdapter.CommentHol
     }
 
     public class CommentHolder extends RecyclerView.ViewHolder {
-        TextView name, email,body;
+        TextView name, email,body,post_title,post_body;
         public CommentHolder(View itemView) {
             super(itemView);
             name=(TextView)itemView.findViewById(R.id.cname);
             email=(TextView)itemView.findViewById(R.id.cemail);
             body=(TextView)itemView.findViewById(R.id.cbody);
+
+
         }
     }
 

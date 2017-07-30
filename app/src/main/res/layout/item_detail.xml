@@ -17,7 +17,7 @@
             android:textColor="@color/colorPrimaryDark"
             android:textStyle="bold"
             android:textSize="16sp"
-            android:text="name"
+            android:text="@string/name"
             android:id="@+id/cname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -27,7 +27,7 @@
             android:textSize="16sp"
             android:padding="5dp"
             android:id="@+id/cbody"
-            android:text="body"
+            android:text="@string/body"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#000"
@@ -35,10 +35,10 @@
         <TextView
             android:padding="5dp"
             android:id="@+id/cemail"
-            android:text="email"
+            android:text="@string/email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="right"/>
+            android:gravity="end"/>
 
 
 

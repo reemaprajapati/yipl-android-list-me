@@ -2,4 +2,9 @@
     <string name="app_name">YIPLlisting</string>
     <string name="mainActivity">Posts</string>
     <string name="detailActivity">Details</string>
+    <string name="name">name</string>
+    <string name="body">body</string>
+    <string name="email">email</string>
+    <string name="_1">1</string>
+    <string name="title">title</string>
 </resources>

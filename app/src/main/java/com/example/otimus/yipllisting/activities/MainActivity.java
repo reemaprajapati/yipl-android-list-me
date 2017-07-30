@@ -1,12 +1,16 @@
-package com.example.otimus.yipllisting;
+package com.example.otimus.yipllisting.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.Toast;
 
+import com.example.otimus.yipllisting.R;
+import com.example.otimus.yipllisting.adapters.PostAdapter;
 import com.example.otimus.yipllisting.databaseHelper.SQLiteHandler;
 import com.example.otimus.yipllisting.model.DetailItem;
 import com.example.otimus.yipllisting.model.PostItem;
@@ -25,39 +29,38 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
     SQLiteHandler db;
     RecyclerView recyclerView;
+    SwipeRefreshLayout swipeRefreshLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        savePosts();
+        saveDetails();
 
         db = new SQLiteHandler(this);
-
         recyclerView = (RecyclerView) findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
-        savePosts();
-        saveDetails();
-        recyclerView.setAdapter(new PostAdapter(db.allPosts(),new PostAdapter.OnItemClickListener(){
+        setAdapter();
+
+       //load data on swiping
+        swipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.swipeRefreshLayout);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
-            //sending details from MainActivity to DetailActivity as "list" on each item click
-            public void onItemClick(PostItem item) {
-                Intent intent=new Intent(new Intent(getApplicationContext(),DetailActivity.class));
-                List<DetailItem> items=new ArrayList<>();
-                items.addAll(db.allDetails(item.getId()));
-                intent.putExtra("list", (Serializable) items);
-                startActivity(intent);
+            public void onRefresh() {
+                savePosts();
+                saveDetails();
+                setAdapter();
+                swipeRefreshLayout.setRefreshing(false);
             }
-        }));
-
+        });
     }
-
 
     //retrieving data from www.jsonplaceholder.typecode.com/posts and storing to the database
     public void savePosts(){
         ApiInterface apiInterface = ApiClient.getClient().create(ApiInterface.class);
         Call<List<PostItem>> call = apiInterface.getPosts();
         call.enqueue(new Callback<List<PostItem>>() {
-
             @Override
             public void onResponse(Call<List<PostItem>> call, Response<List<PostItem>> response) {
                 for (PostItem postitem : response.body()
@@ -70,9 +73,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<List<PostItem>> call, Throwable t) {
                 t.printStackTrace();
+                Toast.makeText(MainActivity.this, "Check Internet Connection", Toast.LENGTH_SHORT).show();
             }
         });
     }
+
 
     //retrieving data from www.jsonplaceholer.typecode.com/posts/{id}/comments
     public  void saveDetails(){
@@ -101,5 +106,19 @@ public class MainActivity extends AppCompatActivity {
             });
         }
 
+    }
+
+    public void setAdapter(){
+        recyclerView.setAdapter(new PostAdapter(db.allPosts(),new PostAdapter.OnItemClickListener(){
+            @Override
+            //sending details from MainActivity to DetailActivity as "list" on each item click
+            public void onItemClick(PostItem item) {
+                Intent intent=new Intent(new Intent(getApplicationContext(),DetailActivity.class));
+                List<DetailItem> items=new ArrayList<>();
+                items.addAll(db.allDetails(item.getId()));
+                intent.putExtra("list", (Serializable) items);
+                startActivity(intent);
+            }
+        }));
     }
  }

@@ -13,23 +13,23 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
-            android:textSize="16sp"
+            android:textSize="18sp"
             android:textStyle="bold"
             android:textColor="@color/colorPrimary"
             android:padding="10dp"
             android:id="@+id/post_id"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="1"/>
+            android:text="@string/_1"/>
         <TextView
             android:textStyle="bold"
-            android:textSize="16sp"
+            android:textSize="17sp"
             android:textColor="@color/colorPrimary"
             android:padding="10dp"
             android:id="@+id/post_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="sdkjnsdn"
+            android:text="@string/title"
 
             android:layout_alignParentTop="true"
             android:layout_toRightOf="@+id/post_id"
@@ -37,12 +37,12 @@
 
         <TextView
             android:textColor="#000"
-            android:textSize="14sp"
+            android:textSize="16sp"
             android:padding="10dp"
             android:id="@+id/body"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="lksdblfads"
+            android:text="@string/body"
             android:layout_below="@+id/post_title"
             android:layout_alignLeft="@+id/post_title"
             android:layout_alignStart="@+id/post_title" />
