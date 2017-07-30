@@ -1,6 +1,6 @@
 #YIPLlisting
 -----------------------------
-YIPLlisting is an android application that simply lists the data from jsonplaceholder.typicode.com/posts.It contains two activities in total, Main Activity and Detail Activity.
+YIPLlisting is an android application that simply lists the data from http://jsonplaceholder.typicode.com/posts/ .It contains two activities in total, Main Activity and Detail Activity.
 
 Main Activity contains list of posts and on clicking any one of the post, its detail activity will show up.
 Once the data is loaded, the data is stored into sqlite database so that it can be viewed in offline mode too.
