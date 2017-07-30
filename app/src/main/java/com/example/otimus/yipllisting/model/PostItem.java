@@ -8,16 +8,16 @@ import com.google.gson.annotations.SerializedName;
  */
 public class PostItem {
     @SerializedName("userId")
-    Integer userId;
+    private Integer userId;
 
     @SerializedName("id")
-    Integer id;
+    private Integer id;
 
     @SerializedName("title")
-    String title;
+    private String title;
 
     @SerializedName("body")
-    String body;
+    private String body;
 
     public PostItem() {
     }

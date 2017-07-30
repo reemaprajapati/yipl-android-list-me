@@ -2,20 +2,25 @@ package com.example.otimus.yipllisting.model;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
+
 /**
  * Created by Otimus on 11/6/2016.
  */
-public class DetailItem {
+public class DetailItem implements Serializable{
     @SerializedName("postId")
-    Integer postId;
+    private Integer postId;
     @SerializedName("id")
-    Integer id;
+     private Integer id;
     @SerializedName("name")
-    String pname;
+     private  String pname;
     @SerializedName("email")
-    String email;
+    private String email;
     @SerializedName("body")
-    String body;
+    private  String body;
+
+    public DetailItem() {
+    }
 
     public DetailItem(Integer postId, Integer id, String pname, String email, String body) {
         this.postId = postId;
